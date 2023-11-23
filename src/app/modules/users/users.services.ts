@@ -24,7 +24,15 @@ const getUsersFromDB = async () => {
   return users;
 };
 
+const getSingleUserById = async (userId: string) => {
+  // use an static method:
+  const user = await User.isUserExists(userId);
+
+  return user;
+};
+
 export const UserServices = {
   createUserIntoDB,
   getUsersFromDB,
+  getSingleUserById,
 };

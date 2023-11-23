@@ -1,5 +1,11 @@
 import { Schema, model } from "mongoose";
-import { IAddress, IFullName, IOrder, TUser } from "./users.interface";
+import {
+  IAddress,
+  IFullName,
+  IOrder,
+  IUserModel,
+  TUser,
+} from "./users.interface";
 import bcrypt from "bcrypt";
 import configs from "../../configs";
 const fullNameSchema = new Schema<IFullName>(
@@ -66,7 +72,7 @@ const orderSchema = new Schema<IOrder>(
   },
 );
 
-const userSchema = new Schema<TUser>({
+const userSchema = new Schema<TUser, IUserModel>({
   userId: {
     type: String,
     trim: true,
@@ -133,6 +139,15 @@ userSchema.post("save", async function (doc, next) {
   next();
 });
 
-const User = model<TUser>("User", userSchema);
+// create an static method to check isUserExits or not ?
+userSchema.statics.isUserExists = async function (userId: string) {
+  const isUserExists = await User.findOne(
+    { userId },
+    { password: 0, _id: 0, __v: 0, orders: 0 },
+  );
+  return isUserExists;
+};
+
+const User = model<TUser, IUserModel>("User", userSchema);
 
 export default User;

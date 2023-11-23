@@ -42,7 +42,51 @@ const getAllUsers = async (req: Request, res: Response) => {
   } catch (err: unknown) {
     res.status(500).send({
       success: false,
-      message: "User didn't found successfully",
+      message: "User didn't fetched",
+      error: err,
+    });
+  }
+};
+
+// retrieve single user by userId:
+const getSingleUser = async (req: Request, res: Response) => {
+  try {
+    const { userId } = req.params;
+    console.log(userId);
+
+    if (!userId) {
+      return res.status(200).send({
+        success: true,
+        message: "Please provide an userId",
+        error: {
+          code: 404,
+          message: "Please provide an userId",
+        },
+      });
+    }
+
+    const user = await UserServices.getSingleUserById(userId);
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+        error: {
+          code: 404,
+          message: "User not found",
+        },
+      });
+    }
+
+    res.status(200).json({
+      success: false,
+      message: "User fetched successfully",
+      data: user,
+    });
+  } catch (err: any) {
+    res.status(500).send({
+      success: false,
+      message: err.message,
       error: err,
     });
   }
@@ -51,4 +95,5 @@ const getAllUsers = async (req: Request, res: Response) => {
 export const UserController = {
   createUser,
   getAllUsers,
+  getSingleUser,
 };
