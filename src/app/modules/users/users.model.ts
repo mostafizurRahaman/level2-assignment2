@@ -114,7 +114,6 @@ const userSchema = new Schema<TUser>({
    orders: [
       {
          type: orderSchema,
-         required: [true, "order is required"],
       },
    ],
 });
@@ -125,6 +124,12 @@ userSchema.pre("save", async function (next) {
       this.password,
       Number(configs.bcrypt_solts_rounds)
    );
+   next();
+});
+
+// remove password with post hook:
+userSchema.post("save", async function (doc, next) {
+   doc.password = "";
    next();
 });
 
