@@ -10,7 +10,7 @@ app.use(express.json());
 
 // main route of my server :
 app.get("/", (req: Request, res: Response) => {
-   res.status(200).send(`Yah!! My server is running now🤷‍♂️`);
+  res.status(200).send(`Yah!! My server is running now🤷‍♂️`);
 });
 
 // all  application routes:
