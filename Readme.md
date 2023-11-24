@@ -113,3 +113,87 @@
       ]
    }
    ```
+
+-  ### Get Single User By `userId`:
+
+   -  method: `GET`,
+   -  route: `/api/users/:userId`,
+   -  params: pass `userId` as params
+   -  Response:
+
+   ```json
+   {
+      "success": true,
+      "message": "User fetched successfully",
+      "data": {
+         "userId": 2,
+         "username": "roman2",
+         "fullName": {
+            "firstName": "Roman",
+            "lastName": "Hossain"
+         },
+         "age": 30,
+         "email": "roman@example.com",
+         "isActive": true,
+         "hobbies": ["Reading", "Traveling"],
+         "address": {
+            "street": "123 Main St",
+            "city": "Anytown",
+            "country": "USA"
+         }
+      }
+   }
+   ```
+
+-  ### Update Single User By `userId`
+
+   -  method: `PUT`
+   -  route: `/api/users/:userId/`
+   -  Request Body:
+
+      ```json
+      {
+         "userId": 4,
+         "username": "roman4",
+         "password": "secure_password",
+         "fullName": {
+            "firstName": "Roman",
+            "lastName": "Hossain"
+         },
+         "age": 30,
+         "email": "roman@example.com",
+         "isActive": true,
+         "hobbies": ["Reading", "Traveling"],
+         "address": {
+            "street": "123 Main St",
+            "city": "Anytown",
+            "country": "USA"
+         }
+      }
+      ```
+
+   -  Response :
+
+   ```json
+   {
+      "success": true,
+      "message": "User updated successfully!",
+      "data": {
+         "userId": 4,
+         "username": "roman4",
+         "fullName": {
+            "firstName": "Ratul",
+            "lastName": "Hossain"
+         },
+         "age": 30,
+         "email": "roman@example.com",
+         "isActive": true,
+         "hobbies": ["Reading", "Traveling"],
+         "address": {
+            "street": "123 Main St",
+            "city": "Anytown",
+            "country": "USA"
+         }
+      }
+   }
+   ```
