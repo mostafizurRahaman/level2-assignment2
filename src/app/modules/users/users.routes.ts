@@ -4,9 +4,19 @@ import { UserController } from "./users.controller";
 const router: Router = express.Router();
 
 router
+   .route("/:userId/orders/total-price")
+   .get(UserController.getTotalPriceByUserId);
+
+router
+   .route("/:userId/orders")
+   .post(UserController.createAnOrderByID)
+   .get(UserController.getAllOrdersById);
+
+router
    .route("/:userId")
    .get(UserController.getSingleUser)
-   .delete(UserController.deleteUserById);
+   .delete(UserController.deleteUserById)
+   .put(UserController.updateUserById);
 
 router
    .route("/")
