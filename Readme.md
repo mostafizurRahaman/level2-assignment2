@@ -149,6 +149,7 @@
 
    -  method: `PUT`
    -  route: `/api/users/:userId/`
+   -  params: pass `userId` as params
    -  Request Body:
 
       ```json
@@ -197,3 +198,92 @@
       }
    }
    ```
+
+-  ### Delete User with `userId`:
+
+   -  method: `delete`,
+   -  route: `/api/users/:userId/`
+   -  params: pass `userId` as params
+   -  Response:
+
+   ```json
+   {
+      "success": false,
+      "message": "User not found",
+      "error": {
+         "code": 404,
+         "description": "User not found!"
+      }
+   }
+   ```
+
+-  ### Create an order on user object By `userId`:
+
+   -  method: `POST`,
+   -  route: `/api/users/:userId/orders`
+   -  params: pass `userId` as params
+   -  Request:
+
+   ```json
+   {
+      "productName": "Example Product",
+      "price": 29.99,
+      "quantity": 100
+   }
+   ```
+
+   -  Response:
+
+   ```json
+   {
+      "success": true,
+      "message": "Order created successfully!",
+      "data": null
+   }
+   ```
+
+-  ### Get user all orders by `userId`:
+
+   -  method: `GET`
+   -  route: `/api/users/:userId/orders/`
+   -  params: pass `userId` as params
+   -  Response :
+
+   ```json
+   {
+      "success": true,
+      "message": "Order created successfully!",
+      "data": {
+         "orders": [
+            {
+               "productName": "Example Product",
+               "price": 29.99,
+               "quantity": 100
+            }
+         ]
+      }
+   }
+   ```
+
+-  ### Get User's orders totalPrice by `userId`:
+
+   -  method: `GET`
+   -  route: `/api/users/:userId/orders/`
+   -  params: pass `userId` as params
+   -  Response :
+
+   ```json
+   {
+      "success": true,
+      "message": "Total price calculated successfully!",
+      "data": {
+         "totalPrice": 0
+      }
+   }
+   ```
+
+# Finally Deployed On vercel :
+
+-  Root URL : https://etms-server-5q5u0wdoc-mostafizurrahaman.vercel.app/
+
+# Thank you for reading carefully.
