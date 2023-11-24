@@ -1,5 +1,7 @@
+import bcrypt from "bcrypt";
 import { IOrder, TUser } from "./users.interface";
 import User from "./users.model";
+import configs from "../../configs";
 
 const createUserIntoDB = async (userData: TUser) => {
    const user = await User.create(userData);
@@ -32,11 +34,19 @@ const getSingleUserByIdFromDB = async (userId: number) => {
 };
 
 const updateUserByIdIntoDB = async (userId: number, userData: TUser) => {
-   const result = await User.updateOne(
+   if (userData.password) {
+      userData.password = await bcrypt.hash(
+         userData.password,
+         Number(configs.bcrypt_solts_rounds)
+      );
+   }
+   const result = await User.findOneAndUpdate(
       { userId },
       { $set: userData },
       {
          runValidators: true,
+         new: true,
+         projection: { password: 0, __v: 0, _id: 0, isDeleted: 0, orders: 0 },
       }
    );
 

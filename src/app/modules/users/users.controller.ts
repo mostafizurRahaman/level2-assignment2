@@ -15,7 +15,6 @@ const createUser = async (req: Request, res: Response) => {
       const user = await UserServices.createUserIntoDB(validateUser);
 
       const { password, isDeleted, _id, orders, ...others } = user.toObject();
-      console.log(password, isDeleted, _id, orders);
 
       res.status(200).json({
          success: true,
@@ -85,7 +84,7 @@ const getSingleUser = async (req: Request, res: Response) => {
       }
 
       res.status(200).json({
-         success: false,
+         success: true,
          message: "User fetched successfully",
          data: user,
       });
@@ -128,7 +127,7 @@ const updateUserById = async (req: Request, res: Response) => {
          validateUserData
       );
 
-      if (!result.modifiedCount) {
+      if (!result) {
          return res.status(404).json({
             success: false,
             message: "User didn't updated successfully!",
@@ -282,7 +281,9 @@ const getAllOrdersById = async (req: Request, res: Response) => {
       res.status(200).json({
          success: true,
          message: "Order created successfully!",
-         data: result,
+         data: {
+            orders: result[0].orders,
+         },
       });
    } catch (err: any) {
       res.status(500).json({
