@@ -24,14 +24,14 @@ const getUsersFromDB = async () => {
    return users;
 };
 
-const getSingleUserByIdFromDB = async (userId: string) => {
+const getSingleUserByIdFromDB = async (userId: number) => {
    // use an static method:
    const user = await User.isUserExists(userId);
 
    return user;
 };
 
-const updateUserByIdIntoDB = async (userId: string, userData: TUser) => {
+const updateUserByIdIntoDB = async (userId: number, userData: TUser) => {
    const result = await User.updateOne(
       { userId },
       { $set: userData },
@@ -43,7 +43,7 @@ const updateUserByIdIntoDB = async (userId: string, userData: TUser) => {
    return result;
 };
 
-const deleteUserByIdFromDB = async (userId: string) => {
+const deleteUserByIdFromDB = async (userId: number) => {
    const result = await User.updateOne(
       { userId },
       { $set: { isDeleted: true } }
@@ -52,7 +52,7 @@ const deleteUserByIdFromDB = async (userId: string) => {
 };
 
 // place order services:
-const createAnOrderByUserIdIntoDB = async (userId: string, order: IOrder) => {
+const createAnOrderByUserIdIntoDB = async (userId: number, order: IOrder) => {
    const result = await User.updateOne(
       { userId },
       { $push: { orders: order } },
@@ -65,7 +65,7 @@ const createAnOrderByUserIdIntoDB = async (userId: string, order: IOrder) => {
 };
 
 // get orders by UserID:
-const getOrdersByIdFromDB = async (userId: string) => {
+const getOrdersByIdFromDB = async (userId: number) => {
    const result = await User.aggregate([
       { $match: { userId } },
       { $project: { orders: 1, _id: 0 } },
@@ -75,7 +75,7 @@ const getOrdersByIdFromDB = async (userId: string) => {
 };
 
 //  get TotalOrderPrice By userId:
-const getTotalPriceByIdFromDB = async (userId: string) => {
+const getTotalPriceByIdFromDB = async (userId: number) => {
    const result = await User.aggregate([
       { $match: { userId } },
       { $unwind: "$orders" },

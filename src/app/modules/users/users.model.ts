@@ -74,7 +74,7 @@ const orderSchema = new Schema<IOrder>(
 
 const userSchema = new Schema<TUser, IUserModel>({
   userId: {
-    type: String,
+    type: Number,
     trim: true,
     unique: true,
     required: [true, "userId is required"],

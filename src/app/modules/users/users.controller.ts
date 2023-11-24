@@ -59,8 +59,7 @@ const getAllUsers = async (req: Request, res: Response) => {
 // retrieve single user by userId:
 const getSingleUser = async (req: Request, res: Response) => {
    try {
-      const { userId } = req.params;
-
+      const userId = parseInt(req.params.userId);
       if (!userId) {
          return res.status(200).send({
             success: false,
@@ -105,7 +104,7 @@ const getSingleUser = async (req: Request, res: Response) => {
 // update user with Id :
 const updateUserById = async (req: Request, res: Response) => {
    try {
-      const { userId } = req.params;
+      const userId = parseInt(req.params.userId);
       const userData = req.body;
 
       const validateUserData = userValidationSchema.parse(userData);
@@ -161,7 +160,7 @@ const updateUserById = async (req: Request, res: Response) => {
 
 const deleteUserById = async (req: Request, res: Response) => {
    try {
-      const { userId } = req.params;
+      const userId = parseInt(req.params.userId);
 
       const user = await UserServices.getSingleUserByIdFromDB(userId);
 
@@ -210,7 +209,7 @@ const deleteUserById = async (req: Request, res: Response) => {
 
 const createAnOrderByID = async (req: Request, res: Response) => {
    try {
-      const { userId } = req.params;
+      const userId = parseInt(req.params.userId);
       const orderData = req.body;
 
       const validateOrder = orderValidationSchema.parse(orderData);
@@ -263,7 +262,7 @@ const createAnOrderByID = async (req: Request, res: Response) => {
 // get all order by userId:
 const getAllOrdersById = async (req: Request, res: Response) => {
    try {
-      const { userId } = req.params;
+      const userId = parseInt(req.params.userId);
 
       const user = await UserServices.getSingleUserByIdFromDB(userId);
 
@@ -300,7 +299,7 @@ const getAllOrdersById = async (req: Request, res: Response) => {
 // get Total Price by UserId:
 const getTotalPriceByUserId = async (req: Request, res: Response) => {
    try {
-      const { userId } = req.params;
+      const userId = parseInt(req.params.userId);
 
       const user = await UserServices.getSingleUserByIdFromDB(userId);
 

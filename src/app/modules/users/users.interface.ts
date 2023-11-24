@@ -17,7 +17,7 @@ export interface IOrder {
   quantity: number;
 }
 export type TUser = {
-  userId: string;
+  userId: number;
   username: string;
   password: string;
   fullName: IFullName;
@@ -26,11 +26,11 @@ export type TUser = {
   isActive: boolean;
   hobbies: string[];
   address: IAddress;
-  orders?: IOrder[];
+orders?: IOrder[];
   isDeleted?: boolean;
 };
 
 export interface IUserModel extends Model<TUser> {
   // eslint-disable-next-line no-unused-vars
-  isUserExists(userId: string): Promise<TUser | null>;
+  isUserExists(userId: number): Promise<TUser | null>;
 }
