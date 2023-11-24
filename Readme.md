@@ -29,7 +29,7 @@
 
 # Api End points :
 
--  #### Create new User:
+-  ## Create new User:
 
    -  method: `POST`
    -  route: `/api/users`
@@ -80,5 +80,36 @@
          },
          "__v": 0
       }
+   }
+   ```
+
+-  ## Get All Users:
+
+   -  method: `GET`
+   -  route: `/api/users`
+   -  Response:
+
+   ```json
+   {
+      "success": true,
+      "message": "Users fetched successfully!",
+      "data": [
+         {
+            "username": "roman1",
+            "fullName": {
+               "firstName": "Roman",
+               "lastName": "Hossain"
+            },
+            "age": 30,
+            "email": "roman@example.com",
+            "address": {
+               "street": "123 Main St",
+               "city": "Anytown",
+               "country": "USA"
+            }
+         }
+
+         // others user data:
+      ]
    }
    ```
