@@ -17,10 +17,8 @@ export const orderValidationSchema = z.object({
    quantity: z.number().min(0),
 });
 
-export const userIdValidateSchema = z.number();
-
 const userValidationSchema = z.object({
-   userId: userIdValidateSchema,
+   userId: z.number().min(1),
    username: z.string().trim(),
    password: z.string().trim(),
    fullName: fullNameValidationSchema,

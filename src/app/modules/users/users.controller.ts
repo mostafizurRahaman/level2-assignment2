@@ -14,21 +14,21 @@ const createUser = async (req: Request, res: Response) => {
       // post the validateUser data:
       const user = await UserServices.createUserIntoDB(validateUser);
 
-      const { password, ...others } = user.toObject();
-      console.log(password);
+      const { password, isDeleted, _id, orders, ...others } = user.toObject();
+      console.log(password, isDeleted, _id, orders);
 
       res.status(200).json({
          success: true,
          message: "Users fetched successfully!",
          data: others,
       });
-   } catch (err: unknown) {
+   } catch (err: any) {
       res.status(500).send({
          success: false,
-         message: "User didn't created successfully",
+         message: err.message || "user not created successfully",
          error: {
             code: 500,
-            description: "User didn't created successfully",
+            description: err,
          },
       });
    }
