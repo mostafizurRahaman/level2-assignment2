@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { IOrder, TUser } from "./users.interface";
+import { IOrder, TPartialUser, TUser } from "./users.interface";
 import User from "./users.model";
 import configs from "../../configs";
 
@@ -33,10 +33,7 @@ const getSingleUserByIdFromDB = async (userId: number) => {
    return user;
 };
 
-const updateUserByIdIntoDB = async (
-   userId: number,
-   userData: Partial<TUser>
-) => {
+const updateUserByIdIntoDB = async (userId: number, userData: TPartialUser) => {
    if (userData.password) {
       userData.password = await bcrypt.hash(
          userData.password,

@@ -5,7 +5,7 @@ import userValidationSchema, {
    updateValidationSchema,
 } from "./users.zodValidation";
 import { UserServices } from "./users.services";
-import { TUser } from "./users.interface";
+import { TPartialUser } from "./users.interface";
 
 // create user:
 
@@ -110,8 +110,8 @@ const updateUserById = async (req: Request, res: Response) => {
       const userId = parseInt(req.params.userId);
       const userData = req.body;
 
-      const  validateUserData: Partial<TUser> =
-         updateValidationSchema.partial().parse(userData);
+      const validateUserData: TPartialUser =
+         updateValidationSchema.parse(userData);
 
       const user = await UserServices.getSingleUserByIdFromDB(userId);
 
