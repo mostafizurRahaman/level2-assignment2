@@ -10,17 +10,17 @@ app.use(express.json());
 
 // main route of my server :
 app.get("/", (req: Request, res: Response) => {
-  res.status(200).send(`Yah!! My server is running now🤷‍♂️`);
+   res.status(200).send(`Yah!! My server is running now🤷‍♂️`);
 });
 
 // all  application routes:
 app.use("/api/users", userRouter);
 
 app.all("*", (req: Request, res: Response) => {
-  res.status(404).send({
-    success: false,
-    message: "Route not found ",
-  });
+   res.status(404).send({
+      success: false,
+      message: "Route not found ",
+   });
 });
 
 export default app;

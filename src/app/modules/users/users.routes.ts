@@ -9,7 +9,7 @@ router
 
 router
   .route("/:userId/orders")
-  .post(UserController.createAnOrderByID)
+  .put(UserController.createAnOrderByID)
   .get(UserController.getAllOrdersById);
 
 router
